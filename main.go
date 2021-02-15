@@ -73,7 +73,7 @@ func main() {
 				rdrMap := rdr.Map(true)
 				if len(rdrMap) > 0 {
 					for _, fld := range cfg.Fields {
-						token := mqttClient.Publish(fld.topic, cfg.MQTT.QoS, true, rdrMap[fld.Code].Ieee32)
+						token := mqttClient.Publish(fld.topic, cfg.MQTT.QoS, true, fmt.Sprintf("%.02f", rdrMap[fld.Code].Ieee32))
 						token.Wait()
 						if token.Error() != nil {
 							log.Printf("Error publishing %s: %v", fld.Register.Description, token.Error())
@@ -106,9 +106,11 @@ func hassAdvertise(client mqtt.Client) error {
 		UnitOfMeasurement string `json:"unit_of_measurement,omitempty"`
 	}
 	for _, fld := range cfg.Fields {
-		haData := hassAdvert{Name: fld.Register.Description, StateTopic: fld.topic}
-		haData.UniqueID = fmt.Sprintf("%s_%d", cfg.Name, fld.Code)
-		haData.UnitOfMeasurement = fld.Register.Units
+		haData := hassAdvert{
+			Name:              fmt.Sprintf("%s %s", cfg.Name, fld.Register.Description),
+			StateTopic:        fld.topic,
+			UniqueID:          fmt.Sprintf("%s_%d", cfg.Name, fld.Code),
+			UnitOfMeasurement: fld.Register.Units}
 		switch fld.Register.Units {
 		case "W":
 			haData.Icon = "hass:flash"
