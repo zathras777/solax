@@ -16,7 +16,7 @@ When run without the -daemon flag the app will simply read all available values 
 
 ## Configuration
 
-Configuration is done via a YAML file with a default name of configuration.yaml. 
+Configuration is done via a YAML file with a default name of configuration.yaml.
 
 ## HomeAssistant Discovery
 
