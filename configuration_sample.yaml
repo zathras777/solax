@@ -1,0 +1,31 @@
+# Name of this daemon. Used to create the topics and prefixed for the HA names.
+name: Solax
+# MQTT connection data.
+mqtt:
+  host: 127.0.0.1
+  port: 1883
+  qos: 0
+  # Interval (in seconds) between recordings being taken
+  interval: 2
+  # Prefix to use for the states being published. Format is
+  # {topic_prefix}/{name}/{reading code}/state
+  topic_prefix: inverter
+  # HA discovery prefix to use. Will be published to a topic formatted as
+  # {hassdiscovery_prefix}/sensor/{name}/{reading code}/config
+  hassdiscovery_prefix: homeassistant
+inverter:
+  ipaddress: 127.0.0.1
+  # Type is one of those available in github.com/zathras777/modbusdev
+  type: solaxx1hybrid
+fields:
+  # List of codes to read and publish.
+- code: 30011
+- code: 30012
+- code: 30003
+- code: 30009
+- code: 30023
+- code: 30029
+- code: 30024
+- code: 30025
+- code: 30071
+- code: 30079
