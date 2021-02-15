@@ -15,7 +15,7 @@ type mqttData struct {
 	QoS                 byte
 	Interval            int
 	TopicPrefix         string `yaml:"topic_prefix"`
-	HassdiscoveryPrefix string
+	HassdiscoveryPrefix string `yaml:"hassdiscovery_prefix"`
 }
 
 type inverterData struct {
