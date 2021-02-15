@@ -42,7 +42,7 @@ func parseConfiguration(cfgFn string) (*configData, error) {
 	parsedCfg := configData{}
 	parsedCfg.Inverter.Port = "502"
 
-	cfgData, err := ioutil.ReadFile((cfgFn))
+	cfgData, err := ioutil.ReadFile(cfgFn)
 	if err != nil {
 		return nil, err
 	}
